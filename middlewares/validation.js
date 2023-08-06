@@ -11,15 +11,27 @@ const options = {
   },
 };
 
-module.exports = schema => (req, _res, next) => {
+module.exports = schema => (req, res, next) => {
+  try{
   Object.keys(schema).forEach(key => {
     const { error } = schema[key].validate(req[key], options);
     if (error) {
       const message = error.details[0].message || 'Invalid inputs';
       const response = error.details[0];
-      return _res.status(400).json({ success: false, message: message, data: response }); 
+
+      throw new Error(message);
+     
+      
     }
   });
-
   next();
+ 
+ }catch(e){
+
+   return res.status(412).send({
+        success: false,
+        error:e,
+        message: 'Invalid inputs',
+      });
+ }
 };
