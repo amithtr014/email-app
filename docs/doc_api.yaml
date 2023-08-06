@@ -1,0 +1,260 @@
+openapi: 3.0.0
+info:
+  title: EmailApp-APIS
+  contact: {}
+  version: '1.0'
+servers:
+- url: http://178.128.158.145:3000/user
+  variables: {}
+paths:
+  /save-mail-settings:
+    post:
+      tags:
+      - Misc
+      summary: save-mail-settings
+      operationId: save-mail-settings
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/save-mail-settings-request'
+              - example:
+                  fromName: Vaibhav Namburi
+                  fromEmail: vnamburi@smartleadscale.org
+                  userName: vnamburi@smartleadscale.org
+                  password: sg#2cxEi3Jo@ZX2f!4
+                  smtpHost: smtp.zoho.com.au
+                  smtpPort: '465'
+                  smtpType: tls
+                  messagePerDay: 100
+                  minimumTimeGap: 5
+            example:
+              fromName: Vaibhav Namburi
+              fromEmail: vnamburi@smartleadscale.org
+              userName: vnamburi@smartleadscale.org
+              password: sg#2cxEi3Jo@ZX2f!4
+              smtpHost: smtp.zoho.com.au
+              smtpPort: '465'
+              smtpType: tls
+              messagePerDay: 100
+              minimumTimeGap: 5
+        required: true
+      responses:
+        '201':
+          description: Created
+          headers:
+            X-Powered-By:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Express
+            Content-Length:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: '66'
+            ETag:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: W/"42-qkGZBzkGgIo9ohWMTJkNf9oMBek"
+            Date:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Sun, 06 Aug 2023 08:01:38 GMT
+            Connection:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: keep-alive
+            Keep-Alive:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: timeout=5
+          content:
+            application/json; charset=utf-8:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/m200'
+                - example:
+                    success: true
+                    message: Settings saved successfully
+                    data: {}
+              example:
+                success: true
+                message: Settings saved successfully
+                data: {}
+      deprecated: false
+  /send-mail:
+    post:
+      tags:
+      - Misc
+      summary: send-mail
+      operationId: send-mail
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/send-mail-request'
+              - example:
+                  to: amith014@gmail.com
+                  subject: Test Email
+                  body: This is Test Email
+            example:
+              to: amith014@gmail.com
+              subject: Test Email
+              body: This is Test Email
+        required: true
+      responses:
+        '201':
+          description: Created
+          headers:
+            X-Powered-By:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Express
+            Content-Length:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: '56'
+            ETag:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: W/"38-iK0k/V/G0XN3A/PX+j+moEMuP5E"
+            Date:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Sun, 06 Aug 2023 08:01:53 GMT
+            Connection:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: keep-alive
+            Keep-Alive:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: timeout=5
+          content:
+            application/json; charset=utf-8:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/m200'
+                - example:
+                    success: true
+                    message: Send successfully
+                    data: {}
+              example:
+                success: true
+                message: Send successfully
+                data: {}
+      deprecated: false
+components:
+  schemas:
+    save-mail-settings-request:
+      title: save-mail-settings-request
+      required:
+      - fromName
+      - fromEmail
+      - userName
+      - password
+      - smtpHost
+      - smtpPort
+      - smtpType
+      - messagePerDay
+      - minimumTimeGap
+      type: object
+      properties:
+        fromName:
+          type: string
+        fromEmail:
+          type: string
+        userName:
+          type: string
+        password:
+          type: string
+        smtpHost:
+          type: string
+        smtpPort:
+          type: string
+        smtpType:
+          type: string
+        messagePerDay:
+          type: integer
+          format: int32
+        minimumTimeGap:
+          type: integer
+          format: int32
+      example:
+        fromName: Vaibhav Namburi
+        fromEmail: vnamburi@smartleadscale.org
+        userName: vnamburi@smartleadscale.org
+        password: sg#2cxEi3Jo@ZX2f!4
+        smtpHost: smtp.zoho.com.au
+        smtpPort: '465'
+        smtpType: tls
+        messagePerDay: 100
+        minimumTimeGap: 5
+    m200:
+      title: m200
+      required:
+      - success
+      - message
+      - data
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        data:
+          type: object
+      example:
+        success: true
+        message: Settings saved successfully
+        data: {}
+    send-mail-request:
+      title: send-mail-request
+      required:
+      - to
+      - subject
+      - body
+      type: object
+      properties:
+        to:
+          type: string
+        subject:
+          type: string
+        body:
+          type: string
+      example:
+        to: amith014@gmail.com
+        subject: Test Email
+        body: This is Test Email
+tags:
+- name: Misc
+  description: ''

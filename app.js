@@ -1,3 +1,8 @@
+
+const ymlfile = require('./docs/swaggerCovert');
+const swaggerUi = require('swagger-ui-express');
+
+
 const express           = require('express');
 const app               = express();
 const bodyParser        = require('body-parser');
@@ -15,7 +20,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/user/', user);
-
+app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(ymlfile));
 
 app.listen(port, () => {
   console.log(`API listening at http://localhost:${port}`)
