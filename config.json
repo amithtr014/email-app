@@ -1,0 +1,9 @@
+{
+	
+"mysql_host": "db-mysql-nyc1-63476-do-user-14479681-0.b.db.ondigitalocean.com",
+"mysql_port": "25060",
+"mysql_user": "doadmin",
+"mysql_password": "AVNS_NBPLIvOloxbCkVJZqME",
+"mysql_database": "defaultdb"
+
+}
