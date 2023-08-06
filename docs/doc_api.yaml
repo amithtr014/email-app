@@ -10,7 +10,7 @@ paths:
   /save-mail-settings:
     post:
       tags:
-      - Misc
+      - Email
       summary: save-mail-settings
       operationId: save-mail-settings
       parameters: []
@@ -99,7 +99,7 @@ paths:
   /send-mail:
     post:
       tags:
-      - Misc
+      - Email
       summary: send-mail
       operationId: send-mail
       parameters: []
@@ -256,5 +256,5 @@ components:
         subject: Test Email
         body: This is Test Email
 tags:
-- name: Misc
+- name: Email
   description: ''

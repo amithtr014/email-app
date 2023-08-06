@@ -2,10 +2,15 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
 
+const {
+  validationMiddleware
+} = require('../middlewares');
 
-router.post('/save-mail-settings', userController.saveMailSettings);
+const {saveMailSettingsSchema, sendMailSchema} = require('../validations/schemas');
 
-router.post('/send-mail', userController.sendMail);
+router.post('/save-mail-settings',  validationMiddleware(saveMailSettingsSchema), userController.saveMailSettings);
+
+router.post('/send-mail', validationMiddleware(sendMailSchema), userController.sendMail);
 
 
 module.exports = router;
